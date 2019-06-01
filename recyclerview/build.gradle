@@ -42,7 +42,7 @@ repositories {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'AndroidEssentials'
+    bintrayName = 'AndroidEssentials-RecyclerView'
 
     publishedGroupId = 'me.himanshusoni.androidessentials'
     libraryName = 'AndroidEssentials'
@@ -53,7 +53,7 @@ ext {
     siteUrl = 'https://github.com/himanshu-soni/AndroidEssentials'
     gitUrl = 'https://github.com/himanshu-soni/AndroidEssentials.git'
 
-    libraryVersion = '1.0'
+    libraryVersion = '1.0.2'
 
     developerId = 'himanshu-soni'
     developerName = 'Himanshu Soni'

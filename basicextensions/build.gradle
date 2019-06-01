@@ -11,7 +11,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -41,7 +41,7 @@ repositories {
 
 ext {
     bintrayRepo = 'maven'
-    bintrayName = 'AndroidEssentials'
+    bintrayName = 'AndroidEssentials-BasicExtensions'
 
     publishedGroupId = 'me.himanshusoni.androidessentials'
     libraryName = 'AndroidEssentials'
@@ -52,7 +52,7 @@ ext {
     siteUrl = 'https://github.com/himanshu-soni/AndroidEssentials'
     gitUrl = 'https://github.com/himanshu-soni/AndroidEssentials.git'
 
-    libraryVersion = '0.1.0'
+    libraryVersion = '1.0.2'
 
     developerId = 'himanshu-soni'
     developerName = 'Himanshu Soni'
