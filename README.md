@@ -66,12 +66,10 @@ Contains base classes for recycler view adapters. Just extend one of the base Ad
  * All basic operations like add, remove items from adapter
  * Single choice and multi choice support
 
+> developed to make programming easy.
+>
+> by Himanshu Soni (himanshusoni.me@gmail.com)
 
-
-
-developed to make programming easy.
-
-by Himanshu Soni (himanshusoni.me@gmail.com)
 
 License
 --------
