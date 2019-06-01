@@ -70,6 +70,7 @@ Contains base classes for recycler view adapters. Just extend one of the base Ad
 
 
 developed to make programming easy.
+
 by Himanshu Soni (himanshusoni.me@gmail.com)
 
 License
