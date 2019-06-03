@@ -9,3 +9,5 @@ fun Fragment.toast(@StringRes msgRes: Int) = activity?.toast(msgRes)
 
 fun Fragment.hideKeyboard() = activity?.hideKeyboard()
 fun Fragment.hideKeyboard(v: View) = activity?.hideKeyboard(v)
+
+fun Fragment.isCameraAvailable(): Boolean = activity?.isCameraAvailable() == true
