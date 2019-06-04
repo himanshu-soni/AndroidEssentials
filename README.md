@@ -7,9 +7,9 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.2'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.4'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.2'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.4'
 
 ```
 
