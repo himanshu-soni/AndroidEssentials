@@ -26,7 +26,6 @@ class MainActivity : BaseAppCompatActivity() {
                     openRecyclerViewActivity()
                 }
                 R.id.nav_slideshow -> {
-
                 }
                 R.id.nav_tools -> {
 
