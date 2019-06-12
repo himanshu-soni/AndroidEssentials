@@ -7,9 +7,9 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.4'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.6'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.4'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.6'
 
 ```
 
@@ -17,12 +17,12 @@ BasicExtensions
 ---------------
 Contains Useful and handy Kotlin Extensions for Android classes
 
-Formatting dates like pro:
+Formatting `Date`s like pro:
 ```kotlin
 Date().format("dd-MMM-yyyy")
 ```
 
-Format numbers in any way you want
+Format `Number`s in any way you want
 ```kotlin
 val number1 = 199226.0805
 val number2 = 100
@@ -43,6 +43,13 @@ Showing toast from activity and fragment is as easy as 1,2,3...
 toast(R.string.hello_world) 
 // or
 toast("Hello World!")
+```
+
+Modify `Calendar`s easily. using one method only.
+```kotlin
+val startOfToday = Calendar.getInstance().startOfDay() // sets time to very beginning of the day i.e. 00:00:00.000
+val endOfToday = Calendar.getInstance().endOfDay() // sets time to end of the day i.e. 23:59:59.999
+
 ```
 
 And many more... 

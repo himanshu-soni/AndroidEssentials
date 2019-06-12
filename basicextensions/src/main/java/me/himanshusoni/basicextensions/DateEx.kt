@@ -28,3 +28,19 @@ fun String.asDateOrNull(pattern: String): Date? {
         null
     }
 }
+
+fun Calendar.startOfDay(): Calendar {
+    set(Calendar.HOUR_OF_DAY, 0)
+    set(Calendar.MINUTE, 0)
+    set(Calendar.SECOND, 0)
+    set(Calendar.MILLISECOND, 0)
+    return this
+}
+
+fun Calendar.endOfDay(): Calendar {
+    set(Calendar.HOUR_OF_DAY, 23)
+    set(Calendar.MINUTE, 59)
+    set(Calendar.SECOND, 59)
+    set(Calendar.MILLISECOND, 999)
+    return this
+}

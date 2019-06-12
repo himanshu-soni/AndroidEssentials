@@ -10,8 +10,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 28
-        versionCode 5
-        versionName "1.0.5"
+        versionCode 6
+        versionName "1.0.6"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -52,7 +52,7 @@ ext {
     siteUrl = 'https://github.com/himanshu-soni/AndroidEssentials'
     gitUrl = 'https://github.com/himanshu-soni/AndroidEssentials.git'
 
-    libraryVersion = '1.0.5'
+    libraryVersion = '1.0.6'
 
     developerId = 'himanshu-soni'
     developerName = 'Himanshu Soni'
