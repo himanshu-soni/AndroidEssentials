@@ -7,9 +7,9 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.6'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.7'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.6'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.7'
 
 ```
 
@@ -49,7 +49,13 @@ Modify `Calendar`s easily. using one method only.
 ```kotlin
 val startOfToday = Calendar.getInstance().startOfDay() // sets time to very beginning of the day i.e. 00:00:00.000
 val endOfToday = Calendar.getInstance().endOfDay() // sets time to end of the day i.e. 23:59:59.999
+```
 
+No need to implement unwanted interface methods (Thank god!!!).
+```kotlin
+editText.afterTextChanged { s -> }
+editText.onTextChanged { s, start, before, count -> }
+spinner.onItemSelected { parent, view, position, id -> }
 ```
 
 And many more... 
@@ -58,20 +64,21 @@ And many more...
 * **ContextEx.kt** - contains Context extension functions.
 * **DateEx.kt** - contains Date/String/Calender extension functions. 
 * **EditTextEx.kt** - contains EditText extension functions.
+* **SpinnerEx.kt** - contains Spinner extension functions.
 * **FragmentEx.kt** - contains Fragment extension functions.
 * **NumberEx.kt** - contains Number/Int/Double extension functions.
 * **StringEx.kt** - contains String extension functions.
 * **Units.kt** - contains unit conversion functions.
 * **ViewEx.kt** - contains View extension functions.
 
-
 RecyclerView
 ------------
-Contains base classes for recycler view adapters. Just extend one of the base Adapters and use inbuilt easy to use methods
+Contains base classes for recycler view adapters. Just extend one of the base Adapters and use inbuilt easy to use methods.
 
 #### Features:
  * All basic operations like add, remove items from adapter
  * Single choice and multi choice support
+ * Endless scroll listener
 
 > developed to make programming easy.
 >
