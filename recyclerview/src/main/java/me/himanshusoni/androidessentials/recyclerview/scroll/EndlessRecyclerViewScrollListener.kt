@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 
-abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
+class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
 
     // The minimum amount of items to have below your current scroll position before loading more.
     private var visibleThreshold = 5
@@ -20,18 +20,23 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
 
     private var mLayoutManager: RecyclerView.LayoutManager
 
-    constructor(layoutManager: LinearLayoutManager) {
+    private var onLoadMore: ((page: Int, totalItemsCount: Int) -> Unit)? = null
+
+    constructor(layoutManager: LinearLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
+        this.onLoadMore = action
     }
 
-    constructor(layoutManager: GridLayoutManager) {
+    constructor(layoutManager: GridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
-        visibleThreshold *= layoutManager.spanCount
+        this.visibleThreshold *= layoutManager.spanCount
+        this.onLoadMore = action
     }
 
-    constructor(layoutManager: StaggeredGridLayoutManager) {
+    constructor(layoutManager: StaggeredGridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
-        visibleThreshold *= layoutManager.spanCount
+        this.visibleThreshold *= layoutManager.spanCount
+        this.onLoadMore = action
     }
 
     fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
@@ -87,7 +92,7 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
         // threshold should reflect how many total columns there are too
         if (!loading && lastVisibleItemPosition + visibleThreshold > totalItemCount) {
             currentPage++
-            onLoadMore(currentPage, totalItemCount, view)
+            onLoadMore?.invoke(currentPage, totalItemCount)
             loading = true
         }
     }
@@ -98,8 +103,4 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
         this.previousTotalItemCount = 0
         this.loading = true
     }
-
-    // Defines the process for actually loading more data based on page
-    abstract fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView)
-
 }

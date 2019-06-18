@@ -90,7 +90,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     }
 
     private inner class RecyclerViewAdapter(list: ArrayList<Item>) :
-            BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
+        BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_recycler_view, parent, false)
@@ -115,7 +115,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     }
 
     private inner class MultiRecyclerViewAdapter(list: ArrayList<Item>) :
-            MultiChoiceRecyclerViewAdapter<Item, MultiRecyclerViewAdapter.ViewHolder>(list) {
+        MultiChoiceRecyclerViewAdapter<Item, MultiRecyclerViewAdapter.ViewHolder>(list) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_multi_selection, parent, false)
@@ -130,7 +130,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         }
 
         internal inner class ViewHolder(root: View) : RecyclerView.ViewHolder(root),
-                CompoundButton.OnCheckedChangeListener {
+            CompoundButton.OnCheckedChangeListener {
             init {
                 itemView.cbText.setOnCheckedChangeListener(this)
             }
@@ -143,7 +143,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     }
 
     private inner class SingleRecyclerViewAdapter(list: ArrayList<Item>) :
-            SingleChoiceRecyclerViewAdapter<Item, SingleRecyclerViewAdapter.ViewHolder>(list) {
+        SingleChoiceRecyclerViewAdapter<Item, SingleRecyclerViewAdapter.ViewHolder>(list) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_single_selection, parent, false)
