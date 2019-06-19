@@ -4,19 +4,15 @@ import android.os.Bundle
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import android.view.ViewGroup
 import java.util.*
 
 abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: ArrayList<T>) :
     RecyclerView.Adapter<VH>() {
 
     final override fun getItemCount(): Int = dataSet.size
-    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
-        onCreateDataViewHolder(parent, viewType)
 
     final override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
 
-    abstract fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): VH
     fun getItem(position: Int): T = dataSet[position]
 
     fun replaceItems(newItems: List<T>, areItemsTheSame: (old: T, new: T) -> Boolean) {

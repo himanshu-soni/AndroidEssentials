@@ -101,7 +101,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class RecyclerViewAdapter(list: ArrayList<Item>) :
         BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_recycler_view, parent, false)
             return ViewHolder(v)
         }
@@ -116,7 +116,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class MultiRecyclerViewAdapter(list: ArrayList<Item>) :
         MultiChoiceRecyclerViewAdapter<Item, MultiRecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context)
                 .inflate(R.layout.row_multi_selection, parent, false)
             return ViewHolder(v)
@@ -137,7 +137,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class SingleRecyclerViewAdapter(list: ArrayList<Item>) :
         SingleChoiceRecyclerViewAdapter<Item, SingleRecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_single_selection, parent, false)
             return ViewHolder(v)
         }
