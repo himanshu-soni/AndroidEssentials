@@ -1,5 +1,6 @@
 package me.himanshusoni.basicextensions
 
+import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
@@ -33,3 +34,10 @@ fun EditText.onTextChanged(action: (s: CharSequence?, start: Int, before: Int, c
         }
     })
 }
+
+fun TextInputLayout.errorNull() {
+    isErrorEnabled = false
+    error = null
+}
+
+fun EditText.empty() = setText("")
