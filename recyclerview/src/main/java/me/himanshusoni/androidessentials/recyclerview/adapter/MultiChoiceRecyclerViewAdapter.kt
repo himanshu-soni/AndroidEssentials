@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.util.SparseBooleanArray
 import java.util.*
 import kotlin.collections.HashMap
-import kotlin.collections.Map as Map1
 
 abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(dataSet: ArrayList<T>) :
     BaseRecyclerViewAdapter<T, VH>(dataSet) {

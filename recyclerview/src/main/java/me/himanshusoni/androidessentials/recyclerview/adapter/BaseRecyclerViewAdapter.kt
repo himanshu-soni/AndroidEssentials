@@ -8,13 +8,14 @@ import java.util.*
 abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var dataSet: ArrayList<T>) :
     RecyclerView.Adapter<VH>() {
 
-    fun getItem(position: Int): T {
-        return dataSet[position]
-    }
+    fun getItem(position: Int): T = dataSet[position]
 
-    override fun getItemCount(): Int {
-        return dataSet.size
-    }
+//    fun updateList(diffCallback: DiffCallback<T>) {
+//        val diffResult = DiffUtil.calculateDiff(diffCallback)
+//        diffResult.dispatchUpdatesTo(this)
+//    }
+
+    override fun getItemCount(): Int = dataSet.size
 
     fun add(item: T, notify: Boolean = true) {
         val positionStart = dataSet.size
@@ -69,7 +70,6 @@ abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var data
         if (savedInstanceState == null || !savedInstanceState.containsKey("dataSet")) {
             return
         }
-        @Suppress("UNCHECKED_CAST")
         dataSet = savedInstanceState.getSerializable("dataSet") as ArrayList<T>
         notifyDataSetChanged()
     }
