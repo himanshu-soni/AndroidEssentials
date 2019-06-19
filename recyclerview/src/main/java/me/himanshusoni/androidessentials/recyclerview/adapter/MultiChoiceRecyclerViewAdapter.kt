@@ -8,16 +8,15 @@ import java.util.*
 import kotlin.collections.HashMap
 import kotlin.collections.Map as Map1
 
-abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(dataSet: ArrayList<T>) : BaseRecyclerViewAdapter<T, VH>(dataSet) {
+abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(dataSet: ArrayList<T>) :
+    BaseRecyclerViewAdapter<T, VH>(dataSet) {
 
     private val mSelectedPositions: SparseBooleanArray = SparseBooleanArray()
 
     /**
      * @return Selected items count
      */
-    fun getSelectedItemCount(): Int {
-        return getSelectedItems().size
-    }
+    fun getSelectedItemCount(): Int = getSelectedItems().size
 
     /**
      * Indicates the list of selected items
@@ -27,9 +26,7 @@ abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(d
     fun getSelectedItemPositions(): List<Int> {
         val items = ArrayList<Int>()
         for (i in 0 until mSelectedPositions.size()) {
-            if (mSelectedPositions.get(i)) {
-                items.add(mSelectedPositions.keyAt(i))
-            }
+            if (mSelectedPositions.get(i)) items.add(mSelectedPositions.keyAt(i))
         }
         return items
     }
@@ -54,9 +51,7 @@ abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(d
      *
      * */
     fun setSelectedItems(selectedItemPositions: Collection<Int>, notify: Boolean = true) {
-        selectedItemPositions.forEach {
-            setSelected(it, true, notify)
-        }
+        selectedItemPositions.forEach { setSelected(it, true, notify) }
     }
 
     /**
@@ -74,17 +69,12 @@ abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(d
      */
     fun toggleSelection(position: Int, notify: Boolean = true) {
         mSelectedPositions.put(position, !mSelectedPositions.get(position))
-
-        if (notify) {
-            notifyItemChanged(position)
-        }
+        if (notify) notifyItemChanged(position)
     }
 
     protected fun setSelected(position: Int, selected: Boolean, notify: Boolean = true) {
         mSelectedPositions.put(position, selected)
-        if (notify) {
-            notifyItemChanged(position)
-        }
+        if (notify) notifyItemChanged(position)
     }
 
     /**
@@ -93,12 +83,7 @@ abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(d
     fun clearSelection(notify: Boolean = true) {
         val selection = getSelectedItemPositions()
         mSelectedPositions.clear()
-
-        if (notify) {
-            for (i in selection) {
-                notifyItemChanged(i)
-            }
-        }
+        if (notify) for (i in selection) notifyItemChanged(i)
     }
 
     /**
@@ -127,6 +112,7 @@ abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(d
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState?.containsKey("selectedPositions") == true) {
+            @Suppress("UNCHECKED_CAST")
             val map = savedInstanceState.getSerializable("selectedPositions") as HashMap<Int, Boolean>
             map.forEach { (key, value) ->
                 mSelectedPositions.put(key, value)
