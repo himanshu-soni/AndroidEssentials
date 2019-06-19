@@ -1,21 +1,33 @@
 package me.himanshusoni.androidessentials.recyclerview.adapter
 
 import android.os.Bundle
+import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.view.View
+import android.view.ViewGroup
 import java.util.*
 
-
-abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var dataSet: ArrayList<T>) :
+abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: ArrayList<T>) :
     RecyclerView.Adapter<VH>() {
 
+    final override fun getItemCount(): Int = dataSet.size
+    final override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH =
+        onCreateDataViewHolder(parent, viewType)
+
+    final override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
+
+    abstract fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): VH
     fun getItem(position: Int): T = dataSet[position]
 
-//    fun updateList(diffCallback: DiffCallback<T>) {
-//        val diffResult = DiffUtil.calculateDiff(diffCallback)
-//        diffResult.dispatchUpdatesTo(this)
-//    }
+    fun replaceItems(newItems: List<T>, areItemsTheSame: (old: T, new: T) -> Boolean) {
+        val oldData = dataSet
+        dataSet.clear()
+        dataSet.addAll(newItems)
 
-    override fun getItemCount(): Int = dataSet.size
+        DiffUtil.calculateDiff(
+            DiffCallback(oldData, newItems, diffCallback(areItemsTheSame))
+        ).dispatchUpdatesTo(this)
+    }
 
     fun add(item: T, notify: Boolean = true) {
         val positionStart = dataSet.size
@@ -70,9 +82,12 @@ abstract class BaseRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(var data
         if (savedInstanceState == null || !savedInstanceState.containsKey("dataSet")) {
             return
         }
+        @Suppress("UNCHECKED_CAST")
         dataSet = savedInstanceState.getSerializable("dataSet") as ArrayList<T>
         notifyDataSetChanged()
     }
+}
 
-
+abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
+    abstract fun bind(item: T)
 }

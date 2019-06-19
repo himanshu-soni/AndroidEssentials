@@ -1,11 +1,10 @@
 package me.himanshusoni.androidessentials.recyclerview.adapter
 
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import java.util.*
 
-abstract class SingleChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(dataSet: ArrayList<T>) :
-        BaseRecyclerViewAdapter<T, VH>(dataSet) {
+abstract class SingleChoiceRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(dataSet: ArrayList<T>) :
+    BaseRecyclerViewAdapter<T, VH>(dataSet) {
 
     private var mSelectedItemPosition: Int = -1
 

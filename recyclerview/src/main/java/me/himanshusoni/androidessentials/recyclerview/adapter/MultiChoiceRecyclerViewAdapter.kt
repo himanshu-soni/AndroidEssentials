@@ -2,12 +2,11 @@ package me.himanshusoni.androidessentials.recyclerview.adapter
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v7.widget.RecyclerView
 import android.util.SparseBooleanArray
 import java.util.*
 import kotlin.collections.HashMap
 
-abstract class MultiChoiceRecyclerViewAdapter<T, VH : RecyclerView.ViewHolder>(dataSet: ArrayList<T>) :
+abstract class MultiChoiceRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(dataSet: ArrayList<T>) :
     BaseRecyclerViewAdapter<T, VH>(dataSet) {
 
     private val mSelectedPositions: SparseBooleanArray = SparseBooleanArray()

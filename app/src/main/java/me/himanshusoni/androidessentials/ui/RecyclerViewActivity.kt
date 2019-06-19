@@ -3,11 +3,9 @@ package me.himanshusoni.androidessentials.ui
 import android.os.Bundle
 import android.support.v4.view.GravityCompat
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 import kotlinx.android.synthetic.main.row_multi_selection.view.*
 import kotlinx.android.synthetic.main.row_recycler_view.view.*
@@ -16,6 +14,7 @@ import me.himanshusoni.androidessentials.R
 import me.himanshusoni.androidessentials.data.Item
 import me.himanshusoni.androidessentials.data.ItemProvider
 import me.himanshusoni.androidessentials.recyclerview.adapter.BaseRecyclerViewAdapter
+import me.himanshusoni.androidessentials.recyclerview.adapter.BaseViewHolder
 import me.himanshusoni.androidessentials.recyclerview.adapter.MultiChoiceRecyclerViewAdapter
 import me.himanshusoni.androidessentials.recyclerview.adapter.SingleChoiceRecyclerViewAdapter
 import me.himanshusoni.androidessentials.ui.base.BaseAppCompatActivity
@@ -60,6 +59,16 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
             recyclerView.adapter = mListAdapter
             navView.setCheckedItem(R.id.nav_recycler_view)
         }
+
+//        Timer().scheduleAtFixedRate(
+//            object : TimerTask() {
+//                override fun run() {
+//                    runOnUiThread {
+//                        mListAdapter.replaceItems(ItemProvider.items) { i1, i2 -> i1.name == i2.name }
+//                    }
+//                }
+//            }, 2000, 2000
+//        )
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -92,24 +101,14 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class RecyclerViewAdapter(list: ArrayList<Item>) :
         BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_recycler_view, parent, false)
             return ViewHolder(v)
         }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = getItem(position)
-
-            holder.itemView.tvText.text = item.name
-        }
-
-        internal inner class ViewHolder(root: View) : RecyclerView.ViewHolder(root), View.OnClickListener {
-            init {
-                itemView.setOnClickListener(this)
-            }
-
-            override fun onClick(v: View?) {
-
+        internal inner class ViewHolder(root: View) : BaseViewHolder<Item>(root) {
+            override fun bind(item: Item) {
+                itemView.tvText.text = item.name
             }
         }
     }
@@ -117,27 +116,20 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class MultiRecyclerViewAdapter(list: ArrayList<Item>) :
         MultiChoiceRecyclerViewAdapter<Item, MultiRecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.row_multi_selection, parent, false)
+        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_multi_selection, parent, false)
             return ViewHolder(v)
         }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = getItem(position)
+        internal inner class ViewHolder(root: View) : BaseViewHolder<Item>(root) {
+            override fun bind(item: Item) {
+                itemView.cbText.isChecked = isSelected(adapterPosition)
+                itemView.cbText.text = item.name
 
-            holder.itemView.cbText.isChecked = isSelected(position)
-            holder.itemView.cbText.text = item.name
-        }
-
-        internal inner class ViewHolder(root: View) : RecyclerView.ViewHolder(root),
-            CompoundButton.OnCheckedChangeListener {
-            init {
-                itemView.cbText.setOnCheckedChangeListener(this)
-            }
-
-            override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                // don't notify on checked change
-                setSelected(adapterPosition, isChecked, false)
+                itemView.cbText.setOnCheckedChangeListener { _, isChecked ->
+                    setSelected(adapterPosition, isChecked, false)
+                }
             }
         }
     }
@@ -145,25 +137,19 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
     private inner class SingleRecyclerViewAdapter(list: ArrayList<Item>) :
         SingleChoiceRecyclerViewAdapter<Item, SingleRecyclerViewAdapter.ViewHolder>(list) {
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        override fun onCreateDataViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context).inflate(R.layout.row_single_selection, parent, false)
             return ViewHolder(v)
         }
 
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = getItem(position)
+        internal inner class ViewHolder(root: View) : BaseViewHolder<Item>(root) {
+            override fun bind(item: Item) {
+                itemView.rbText.isChecked = getSelectedItemPosition() == adapterPosition
+                itemView.rbText.text = item.name
 
-            holder.itemView.rbText.isChecked = getSelectedItemPosition() == position
-            holder.itemView.rbText.text = item.name
-        }
-
-        internal inner class ViewHolder(root: View) : RecyclerView.ViewHolder(root), View.OnClickListener {
-            init {
-                itemView.rbText.setOnClickListener(this)
-            }
-
-            override fun onClick(v: View?) {
-                setSelected(adapterPosition, true)
+                itemView.rbText.setOnClickListener {
+                    setSelected(adapterPosition, true)
+                }
             }
         }
     }
