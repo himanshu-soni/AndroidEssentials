@@ -80,3 +80,17 @@ fun Calendar.endOfYear(): Calendar {
     endOfDay()
     return this
 }
+
+fun Calendar.isSameMinute(other: Calendar): Boolean = this.get(Calendar.MINUTE) == other.get(Calendar.MINUTE)
+fun Calendar.isSameHour(other: Calendar): Boolean = this.get(Calendar.HOUR_OF_DAY) == other.get(Calendar.HOUR_OF_DAY)
+fun Calendar.isSameDay(other: Calendar): Boolean = this.get(Calendar.DAY_OF_YEAR) == other.get(Calendar.DAY_OF_YEAR)
+fun Calendar.isSameWeek(other: Calendar): Boolean = this.get(Calendar.WEEK_OF_YEAR) == other.get(Calendar.WEEK_OF_YEAR)
+fun Calendar.isSameMonth(other: Calendar): Boolean = this.get(Calendar.MONTH) == other.get(Calendar.MONTH)
+fun Calendar.isSameYear(other: Calendar): Boolean = this.get(Calendar.YEAR) == other.get(Calendar.YEAR)
+
+fun Date.isSameMinute(other: Date): Boolean = this.toCalendar().isSameMinute(other.toCalendar())
+fun Date.isSameHour(other: Date): Boolean = this.toCalendar().isSameHour(other.toCalendar())
+fun Date.isSameDay(other: Date): Boolean = this.toCalendar().isSameDay(other.toCalendar())
+fun Date.isSameWeek(other: Date): Boolean = this.toCalendar().isSameWeek(other.toCalendar())
+fun Date.isSameMonth(other: Date): Boolean = this.toCalendar().isSameMonth(other.toCalendar())
+fun Date.isSameYear(other: Date): Boolean = this.toCalendar().isSameYear(other.toCalendar())
