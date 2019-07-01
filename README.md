@@ -7,9 +7,9 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.9'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.11'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.9'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.11'
 
 ```
 
@@ -49,6 +49,9 @@ Modify `Calendar`s easily. using one method only.
 ```kotlin
 val startOfToday = Calendar.getInstance().startOfDay() // sets time to very beginning of the day i.e. 00:00:00.000
 val endOfToday = Calendar.getInstance().endOfDay() // sets time to end of the day i.e. 23:59:59.999
+if(calandar1.isSameDay(calendar2)) {  // also available for minute/hour/day/week/month/year and for `Date` too.
+    ///... 
+}
 ```
 
 No need to implement unwanted interface methods (Thank god!!!).
