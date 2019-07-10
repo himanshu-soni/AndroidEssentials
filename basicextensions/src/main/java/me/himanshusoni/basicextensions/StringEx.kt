@@ -2,6 +2,9 @@ package me.himanshusoni.basicextensions
 
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
+import java.math.BigInteger
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 fun String.mask(visibleFirst: Int, visibleLast: Int): String {
     var output = ""
@@ -42,4 +45,20 @@ fun String.highlight(query: String?, highlightColor: Int): Spannable {
     } ?: run {
         return Spannable.Factory.getInstance().newSpannable(this)
     }
+}
+
+fun String.md2(): String? = hashUsing("MD2")
+fun String.md5(): String? = hashUsing("MD5")
+fun String.sha1(): String? = hashUsing("SHA-1")
+fun String.sha256(): String? = hashUsing("SHA-256")
+fun String.sha384(): String? = hashUsing("SHA-384")
+fun String.sha512(): String? = hashUsing("SHA-512")
+
+fun String.hashUsing(algorithm: String): String? = try {
+    val md = MessageDigest.getInstance(algorithm)
+    val md5Data = BigInteger(1, md.digest(this.toByteArray()))
+    String.format("%032x", md5Data)
+} catch (e: NoSuchAlgorithmException) {
+    e.printStackTrace()
+    null
 }
