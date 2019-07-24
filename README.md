@@ -7,9 +7,9 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.11'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.12'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.11'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.12'
 
 ```
 
@@ -38,6 +38,13 @@ Converting different android size units was never so easy before
 12.dpToPx().toFloat() // gives you pixel equivalent of 12dp in Float
 ```
 
+No need to implement unwanted interface methods (Thank god!!!).
+```kotlin
+editText.afterTextChanged { s -> }
+editText.onTextChanged { s, start, before, count -> }
+spinner.onItemSelected { parent, view, position, id -> }
+```
+
 Showing toast from activity and fragment is as easy as 1,2,3...
 ```kotlin
 toast(R.string.hello_world) 
@@ -52,13 +59,6 @@ val endOfToday = Calendar.getInstance().endOfDay() // sets time to end of the da
 if(calandar1.isSameDay(calendar2)) {  // also available for minute/hour/day/week/month/year and for `Date` too.
     ///... 
 }
-```
-
-No need to implement unwanted interface methods (Thank god!!!).
-```kotlin
-editText.afterTextChanged { s -> }
-editText.onTextChanged { s, start, before, count -> }
-spinner.onItemSelected { parent, view, position, id -> }
 ```
 
 And many more... 
