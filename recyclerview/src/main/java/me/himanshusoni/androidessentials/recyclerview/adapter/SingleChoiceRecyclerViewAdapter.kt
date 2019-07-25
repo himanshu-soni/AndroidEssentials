@@ -12,7 +12,7 @@ abstract class SingleChoiceRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(dataSe
 
     fun getSelectedItem(): T? = if (mSelectedItemPosition != -1) getItem(mSelectedItemPosition) else null
 
-    protected fun setSelected(position: Int, notify: Boolean = true) {
+    fun setSelected(position: Int, notify: Boolean = true) {
         val oldPosition = mSelectedItemPosition
         mSelectedItemPosition = position
 
