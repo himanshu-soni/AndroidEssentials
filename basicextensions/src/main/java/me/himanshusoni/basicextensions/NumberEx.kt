@@ -5,7 +5,7 @@ import java.math.RoundingMode
 import java.text.NumberFormat
 
 fun Double.round(places: Int): Double {
-    if (places < 0) throw IllegalArgumentException()
+    require(places >= 0)
 
     var bd = BigDecimal(this)
     bd = bd.setScale(places, RoundingMode.HALF_UP)
@@ -21,6 +21,8 @@ fun Number.format(scale: Int, grouping: Boolean = true, forceScale: Boolean = tr
     return numberFormat.format(this)
 }
 
-fun String.toDoubleOrZero(): Double = if (this.toDoubleOrNull() == null) 0.toDouble() else this.toDouble()
-fun String.toIntOrZero(): Int = if (this.toIntOrNull() == null) 0 else this.toInt()
-fun Number.toStringOrBlank(): String = if (this == 0) "" else this.toString()
+fun String?.toDoubleOrZero(): Double =
+    if (this?.toDoubleOrNull() == null) 0.toDouble() else this.toDouble()
+
+fun String?.toIntOrZero(): Int = if (this?.toIntOrNull() == null) 0 else this.toInt()
+fun Number?.toStringOrBlank(): String = if (this == 0) "" else this.toString()

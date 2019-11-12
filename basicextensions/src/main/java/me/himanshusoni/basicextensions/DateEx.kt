@@ -15,19 +15,14 @@ fun Date.format(format: String): String {
     return df.format(this)
 }
 
-fun String.asDate(pattern: String): Date {
-    val df = SimpleDateFormat(pattern, Locale.getDefault())
-    return df.parse(this)
-}
-
 fun String.asDateOrNull(pattern: String): Date? {
     return try {
-        this.asDate(pattern)
+        val df = SimpleDateFormat(pattern, Locale.getDefault())
+        df.parse(this)
     } catch (e: ParseException) {
         null
     }
 }
-
 
 fun Calendar.startOfDay(): Calendar {
     set(Calendar.HOUR_OF_DAY, getActualMinimum(Calendar.HOUR_OF_DAY))
@@ -81,12 +76,23 @@ fun Calendar.endOfYear(): Calendar {
     return this
 }
 
-fun Calendar.isSameMinute(other: Calendar): Boolean = this.get(Calendar.MINUTE) == other.get(Calendar.MINUTE)
-fun Calendar.isSameHour(other: Calendar): Boolean = this.get(Calendar.HOUR_OF_DAY) == other.get(Calendar.HOUR_OF_DAY)
-fun Calendar.isSameDay(other: Calendar): Boolean = this.get(Calendar.DAY_OF_YEAR) == other.get(Calendar.DAY_OF_YEAR)
-fun Calendar.isSameWeek(other: Calendar): Boolean = this.get(Calendar.WEEK_OF_YEAR) == other.get(Calendar.WEEK_OF_YEAR)
-fun Calendar.isSameMonth(other: Calendar): Boolean = this.get(Calendar.MONTH) == other.get(Calendar.MONTH)
-fun Calendar.isSameYear(other: Calendar): Boolean = this.get(Calendar.YEAR) == other.get(Calendar.YEAR)
+fun Calendar.isSameMinute(other: Calendar): Boolean =
+    this.get(Calendar.MINUTE) == other.get(Calendar.MINUTE)
+
+fun Calendar.isSameHour(other: Calendar): Boolean =
+    this.get(Calendar.HOUR_OF_DAY) == other.get(Calendar.HOUR_OF_DAY)
+
+fun Calendar.isSameDay(other: Calendar): Boolean =
+    this.get(Calendar.DAY_OF_YEAR) == other.get(Calendar.DAY_OF_YEAR)
+
+fun Calendar.isSameWeek(other: Calendar): Boolean =
+    this.get(Calendar.WEEK_OF_YEAR) == other.get(Calendar.WEEK_OF_YEAR)
+
+fun Calendar.isSameMonth(other: Calendar): Boolean =
+    this.get(Calendar.MONTH) == other.get(Calendar.MONTH)
+
+fun Calendar.isSameYear(other: Calendar): Boolean =
+    this.get(Calendar.YEAR) == other.get(Calendar.YEAR)
 
 fun Date.isSameMinute(other: Date): Boolean = this.toCalendar().isSameMinute(other.toCalendar())
 fun Date.isSameHour(other: Date): Boolean = this.toCalendar().isSameHour(other.toCalendar())

@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException
 
 fun String.mask(visibleFirst: Int, visibleLast: Int): String {
     var output = ""
-    for (i in 0 until this.length) {
+    for (i in this.indices) {
         if (i < visibleFirst || i >= (this.length - visibleLast)) {
             output += this[i]
         } else {
@@ -21,8 +21,8 @@ fun String.mask(visibleFirst: Int, visibleLast: Int): String {
 
 fun String.highlight(query: String?, highlightColor: Int): Spannable {
     query?.let {
-        if (!it.isBlank() && this.toLowerCase().contains(it.toLowerCase())) {
-            var startPos = this.toLowerCase().indexOf(it.toLowerCase(), 0)
+        if (!it.isBlank() && this.contains(it, ignoreCase = true)) {
+            var startPos = this.indexOf(it, 0, ignoreCase = true)
             val spanText = Spannable.Factory.getInstance().newSpannable(this)
 
             var hasMore: Boolean
@@ -34,7 +34,7 @@ fun String.highlight(query: String?, highlightColor: Int): Spannable {
                     endPos,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
-                startPos = this.toLowerCase().indexOf(it.toLowerCase(), endPos)
+                startPos = this.indexOf(it, endPos, ignoreCase = true)
                 hasMore = startPos != -1
             } while (hasMore)
 
