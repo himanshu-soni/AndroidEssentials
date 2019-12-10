@@ -1,7 +1,7 @@
 package me.himanshusoni.androidessentials.recyclerview.adapter
 
-import android.support.annotation.Nullable
-import android.support.v7.util.DiffUtil
+import androidx.annotation.Nullable
+import androidx.recyclerview.widget.DiffUtil
 
 class DiffCallback<T>(
     private val oldData: List<T>,

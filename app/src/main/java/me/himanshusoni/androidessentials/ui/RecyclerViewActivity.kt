@@ -1,8 +1,8 @@
 package me.himanshusoni.androidessentials.ui
 
 import android.os.Bundle
-import android.support.v4.view.GravityCompat
-import android.support.v7.widget.LinearLayoutManager
+import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,7 +47,8 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
             true
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager =
+            androidx.recyclerview.widget.LinearLayoutManager(this)
 
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState)
@@ -89,9 +90,9 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putInt("checkedItem", navView.checkedItem?.itemId ?: -1)
+        outState.putInt("checkedItem", navView.checkedItem?.itemId ?: -1)
 
         mListAdapter.onSaveInstanceState(outState)
         mMultiAdapter.onSaveInstanceState(outState)

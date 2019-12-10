@@ -1,13 +1,13 @@
 package me.himanshusoni.androidessentials.recyclerview.adapter
 
 import android.os.Bundle
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import java.util.*
 
 abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: ArrayList<T>) :
-    RecyclerView.Adapter<VH>() {
+    androidx.recyclerview.widget.RecyclerView.Adapter<VH>() {
 
     final override fun getItemCount(): Int = dataSet.size
 
@@ -84,6 +84,6 @@ abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: A
     }
 }
 
-abstract class BaseViewHolder<T>(view: View) : RecyclerView.ViewHolder(view) {
+abstract class BaseViewHolder<T>(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     abstract fun bind(item: T)
 }

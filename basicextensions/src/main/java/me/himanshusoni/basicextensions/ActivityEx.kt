@@ -2,7 +2,7 @@ package me.himanshusoni.basicextensions
 
 import android.app.Activity
 import android.content.Context
-import android.support.v7.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -36,8 +36,8 @@ fun Activity.alert(
     d.show().apply { }
 }
 
-fun Activity.alert(block: AlertDialog.Builder.() -> Unit) {
+fun Activity.alert(block: AlertDialog.Builder.() -> Unit) : AlertDialog {
     val d = AlertDialog.Builder(this)
     d.block()
-    d.show()
+    return d.show()
 }

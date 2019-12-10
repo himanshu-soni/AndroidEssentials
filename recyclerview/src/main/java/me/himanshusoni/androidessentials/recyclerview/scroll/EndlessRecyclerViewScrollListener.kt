@@ -1,11 +1,11 @@
 package me.himanshusoni.androidessentials.recyclerview.scroll
 
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
+class EndlessRecyclerViewScrollListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener {
 
     // The minimum amount of items to have below your current scroll position before loading more.
     private var visibleThreshold = 5
@@ -18,22 +18,22 @@ class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
     // Sets the starting page index
     private val startingPageIndex = 0
 
-    private var mLayoutManager: RecyclerView.LayoutManager
+    private var mLayoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
 
     private var onLoadMore: ((page: Int, totalItemsCount: Int) -> Unit)? = null
 
-    constructor(layoutManager: LinearLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(layoutManager: androidx.recyclerview.widget.LinearLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
         this.onLoadMore = action
     }
 
-    constructor(layoutManager: GridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(layoutManager: androidx.recyclerview.widget.GridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
         this.visibleThreshold *= layoutManager.spanCount
         this.onLoadMore = action
     }
 
-    constructor(layoutManager: StaggeredGridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(layoutManager: androidx.recyclerview.widget.StaggeredGridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
         this.mLayoutManager = layoutManager
         this.visibleThreshold *= layoutManager.spanCount
         this.onLoadMore = action
@@ -54,19 +54,34 @@ class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
     // This happens many times a second during a scroll, so be wary of the code you place here.
     // We are given a few useful parameters to help us work out if we need to load some more data,
     // but first we check if we are waiting for the previous load to finish.
-    override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(view: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
         var lastVisibleItemPosition = 0
         val totalItemCount = mLayoutManager.itemCount
 
-        if (mLayoutManager is StaggeredGridLayoutManager) {
-            val lastVisibleItemPositions =
-                (mLayoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
-            // get maximum element within the list
-            lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
-        } else if (mLayoutManager is GridLayoutManager) {
-            lastVisibleItemPosition = (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
-        } else if (mLayoutManager is LinearLayoutManager) {
-            lastVisibleItemPosition = (mLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+        when (mLayoutManager) {
+            is androidx.recyclerview.widget.StaggeredGridLayoutManager -> {
+                val lastVisibleItemPositions =
+                    (mLayoutManager as androidx.recyclerview.widget.StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
+                // get maximum element within the list
+                lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
+            }
+            is androidx.recyclerview.widget.GridLayoutManager -> {
+                lastVisibleItemPosition = (mLayoutManager as androidx.recyclerview.widget.GridLayoutManager).findLastVisibleItemPosition()
+            }
+            is androidx.recyclerview.widget.LinearLayoutManager -> {
+                lastVisibleItemPosition = (mLayoutManager as androidx.recyclerview.widget.LinearLayoutManager).findLastVisibleItemPosition()
+            }
+
+            // If the total item count is zero and the previous isn't, assume the
+            // list is invalidated and should be reset back to initial state
+            // If it’s still loading, we check to see if the dataset count has
+            // changed, if so we conclude it has finished loading and update the current page
+            // number and total item count.
+
+            // If it isn’t currently loading, we check to see if we have breached
+            // the visibleThreshold and need to reload more data.
+            // If we do need to reload some more data, we execute onLoadMore to fetch the data.
+            // threshold should reflect how many total columns there are too
         }
 
         // If the total item count is zero and the previous isn't, assume the

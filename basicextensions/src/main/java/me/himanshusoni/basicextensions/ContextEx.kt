@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.widget.Toast
 import java.io.File
 
