@@ -5,10 +5,9 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
-import androidx.annotation.StringRes
 import android.widget.Toast
+import androidx.annotation.StringRes
 import java.io.File
-
 
 fun Context.toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
 fun Context.toast(@StringRes msgRes: Int) = toast(getString(msgRes))
@@ -19,7 +18,8 @@ fun Context.isConnectedToNetwork(): Boolean {
     return activeNetwork != null && activeNetwork.isConnected
 }
 
-fun Context.isCameraAvailable(): Boolean = packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)
+fun Context.isCameraAvailable(): Boolean =
+    packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)
 
 fun Context.shareFile(file: File, header: String = "Share") {
     val uri = Uri.fromFile(file)

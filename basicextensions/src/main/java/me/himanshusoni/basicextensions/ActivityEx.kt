@@ -36,8 +36,8 @@ fun Activity.alert(
     d.show().apply { }
 }
 
-fun Activity.alert(block: AlertDialog.Builder.() -> Unit) : AlertDialog {
+fun Activity.alert(block: AlertDialog.Builder.() -> Unit): AlertDialog? {
     val d = AlertDialog.Builder(this)
     d.block()
-    return d.show()
+    return if (!isFinishing) d.show() else null
 }
