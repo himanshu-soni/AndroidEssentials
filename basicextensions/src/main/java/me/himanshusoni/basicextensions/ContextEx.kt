@@ -4,7 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.widget.Toast
 import androidx.annotation.StringRes
 import java.io.File
@@ -13,9 +15,24 @@ fun Context.toast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).s
 fun Context.toast(@StringRes msgRes: Int) = toast(getString(msgRes))
 
 fun Context.isConnectedToNetwork(): Boolean {
-    val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val activeNetwork = cm.activeNetworkInfo
-    return activeNetwork != null && activeNetwork.isConnected
+    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val nw = connectivityManager.activeNetwork ?: return false
+        val actNw = connectivityManager.getNetworkCapabilities(nw) ?: return false
+        return when {
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+            //for other device how are able to connect with Ethernet
+            actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+            else -> false
+        }
+    } else {
+        @Suppress("DEPRECATION")
+        val nwInfo = connectivityManager.activeNetworkInfo ?: return false
+
+        @Suppress("DEPRECATION")
+        return nwInfo.isConnected
+    }
 }
 
 fun Context.isCameraAvailable(): Boolean =

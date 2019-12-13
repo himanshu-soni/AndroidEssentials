@@ -1,1 +1,4 @@
-include ':app', ':recyclerview', ':basicextensions'
+include ":app"
+include ":recyclerview"
+include ":basicextensions"
+include ":gson-extensions"

@@ -7,9 +7,11 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.14'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.16'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.14'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.16'
+
+implementation 'me.himanshusoni.androidessentials:gson-extensions:1.0.16'
 
 ```
 
@@ -77,6 +79,11 @@ And many more...
 RecyclerView
 ------------
 Contains base classes for recycler view adapters. Just extend one of the base Adapters and use inbuilt easy to use methods.
+
+
+GsonExtensions
+--------------
+[click here](gson-extensions/README.md) for details
 
 #### Features:
  * All basic operations like add, remove items from adapter

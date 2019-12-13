@@ -8,8 +8,8 @@ android {
         applicationId "me.himanshusoni.androidessentials"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 15
-        versionName "1.0.15"
+        versionCode 16
+        versionName "1.0.16"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -36,6 +36,7 @@ dependencies {
 
     implementation project(":recyclerview")
     implementation project(":basicextensions")
+    implementation project(":gson-extensions")
 
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test.ext:junit:1.1.1"

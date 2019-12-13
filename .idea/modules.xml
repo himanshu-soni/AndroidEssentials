@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/StudioProjects-AndroidEssentials.iml" filepath="$PROJECT_DIR$/StudioProjects-AndroidEssentials.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basicextensions/basicextensions.iml" filepath="$PROJECT_DIR$/basicextensions/basicextensions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gson-extensions/gson-extensions.iml" filepath="$PROJECT_DIR$/gson-extensions/gson-extensions.iml" />
       <module fileurl="file://$PROJECT_DIR$/recyclerview/recyclerview.iml" filepath="$PROJECT_DIR$/recyclerview/recyclerview.iml" />
     </modules>
   </component>
