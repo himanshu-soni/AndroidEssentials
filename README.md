@@ -83,7 +83,7 @@ Contains base classes for recycler view adapters. Just extend one of the base Ad
 
 GsonExtensions
 --------------
-[click here](gson-extensions/README.md) for details
+[click here](gson-extensions) for details
 
 #### Features:
  * All basic operations like add, remove items from adapter
