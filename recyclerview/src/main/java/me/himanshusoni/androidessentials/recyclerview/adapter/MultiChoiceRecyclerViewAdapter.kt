@@ -3,6 +3,7 @@ package me.himanshusoni.androidessentials.recyclerview.adapter
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.SparseBooleanArray
+import me.himanshusoni.androidessentials.recyclerview.model.BaseViewHolder
 import java.util.*
 import kotlin.collections.HashMap
 

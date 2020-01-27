@@ -1,11 +1,11 @@
 package me.himanshusoni.androidessentials.ui
 
 import android.os.Bundle
-import androidx.core.view.GravityCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_recycler_view.*
 import kotlinx.android.synthetic.main.row_multi_selection.view.*
 import kotlinx.android.synthetic.main.row_recycler_view.view.*
@@ -14,9 +14,9 @@ import me.himanshusoni.androidessentials.R
 import me.himanshusoni.androidessentials.data.Item
 import me.himanshusoni.androidessentials.data.ItemProvider
 import me.himanshusoni.androidessentials.recyclerview.adapter.BaseRecyclerViewAdapter
-import me.himanshusoni.androidessentials.recyclerview.adapter.BaseViewHolder
 import me.himanshusoni.androidessentials.recyclerview.adapter.MultiChoiceRecyclerViewAdapter
 import me.himanshusoni.androidessentials.recyclerview.adapter.SingleChoiceRecyclerViewAdapter
+import me.himanshusoni.androidessentials.recyclerview.model.BaseViewHolder
 import me.himanshusoni.androidessentials.ui.base.BaseAppCompatActivity
 
 class RecyclerViewActivity : BaseAppCompatActivity() {
@@ -47,8 +47,8 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
             true
         }
 
-        recyclerView.layoutManager =
-            androidx.recyclerview.widget.LinearLayoutManager(this)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState)
@@ -61,25 +61,26 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
             navView.setCheckedItem(R.id.nav_recycler_view)
         }
 
+
 //        Timer().scheduleAtFixedRate(
 //            object : TimerTask() {
 //                override fun run() {
 //                    runOnUiThread {
-//                        mListAdapter.replaceItems(ItemProvider.items) { i1, i2 -> i1.name == i2.name }
+//                        //mListAdapter.replaceItems(ItemProvider.items) { i1, i2 -> i1.name == i2.name }
 //                    }
 //                }
-//            }, 2000, 2000
+//            }, 5000, 2000
 //        )
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
         mListAdapter.onRestoreInstanceState(savedInstanceState)
         mMultiAdapter.onRestoreInstanceState(savedInstanceState)
         mSingleAdapter.onRestoreInstanceState(savedInstanceState)
 
-        val checkedItem = savedInstanceState?.getInt("checkedItem") ?: R.id.nav_recycler_view
+        val checkedItem = savedInstanceState.getInt("checkedItem", R.id.nav_recycler_view)
 
         navView.setCheckedItem(checkedItem)
         recyclerView.adapter = when (checkedItem) {
@@ -103,7 +104,8 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.row_recycler_view, parent, false)
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_recycler_view, parent, false)
             return ViewHolder(v)
         }
 
@@ -139,7 +141,8 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         SingleChoiceRecyclerViewAdapter<Item, SingleRecyclerViewAdapter.ViewHolder>(list) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.row_single_selection, parent, false)
+            val v = LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_single_selection, parent, false)
             return ViewHolder(v)
         }
 

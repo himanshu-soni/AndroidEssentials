@@ -8,8 +8,8 @@ android {
         applicationId "me.himanshusoni.androidessentials"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 16
-        versionName "1.0.16"
+        versionCode versionCode
+        versionName versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -38,7 +38,7 @@ dependencies {
     implementation project(":basicextensions")
     implementation project(":gson-extensions")
 
-    testImplementation "junit:junit:4.12"
+    testImplementation 'junit:junit:4.13'
     androidTestImplementation "androidx.test.ext:junit:1.1.1"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }

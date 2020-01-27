@@ -1,6 +1,7 @@
 package me.himanshusoni.androidessentials.recyclerview.adapter
 
 import android.os.Bundle
+import me.himanshusoni.androidessentials.recyclerview.model.BaseViewHolder
 import java.util.*
 
 abstract class SingleChoiceRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(dataSet: ArrayList<T>) :
@@ -10,7 +11,8 @@ abstract class SingleChoiceRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(dataSe
 
     fun getSelectedItemPosition(): Int = mSelectedItemPosition
 
-    fun getSelectedItem(): T? = if (mSelectedItemPosition != -1) getItem(mSelectedItemPosition) else null
+    fun getSelectedItem(): T? =
+        if (mSelectedItemPosition != -1) getItem(mSelectedItemPosition) else null
 
     fun setSelected(position: Int, notify: Boolean = true) {
         val oldPosition = mSelectedItemPosition

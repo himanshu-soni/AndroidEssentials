@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-class EndlessRecyclerViewScrollListener : androidx.recyclerview.widget.RecyclerView.OnScrollListener {
+class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
 
     // The minimum amount of items to have below your current scroll position before loading more.
     private var visibleThreshold = 5
@@ -18,22 +18,31 @@ class EndlessRecyclerViewScrollListener : androidx.recyclerview.widget.RecyclerV
     // Sets the starting page index
     private val startingPageIndex = 0
 
-    private var mLayoutManager: androidx.recyclerview.widget.RecyclerView.LayoutManager
+    private var mLayoutManager: RecyclerView.LayoutManager
 
     private var onLoadMore: ((page: Int, totalItemsCount: Int) -> Unit)? = null
 
-    constructor(layoutManager: androidx.recyclerview.widget.LinearLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(
+        layoutManager: LinearLayoutManager,
+        action: (page: Int, totalItemsCount: Int) -> Unit
+    ) {
         this.mLayoutManager = layoutManager
         this.onLoadMore = action
     }
 
-    constructor(layoutManager: androidx.recyclerview.widget.GridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(
+        layoutManager: GridLayoutManager,
+        action: (page: Int, totalItemsCount: Int) -> Unit
+    ) {
         this.mLayoutManager = layoutManager
         this.visibleThreshold *= layoutManager.spanCount
         this.onLoadMore = action
     }
 
-    constructor(layoutManager: androidx.recyclerview.widget.StaggeredGridLayoutManager, action: (page: Int, totalItemsCount: Int) -> Unit) {
+    constructor(
+        layoutManager: StaggeredGridLayoutManager,
+        action: (page: Int, totalItemsCount: Int) -> Unit
+    ) {
         this.mLayoutManager = layoutManager
         this.visibleThreshold *= layoutManager.spanCount
         this.onLoadMore = action
@@ -54,22 +63,24 @@ class EndlessRecyclerViewScrollListener : androidx.recyclerview.widget.RecyclerV
     // This happens many times a second during a scroll, so be wary of the code you place here.
     // We are given a few useful parameters to help us work out if we need to load some more data,
     // but first we check if we are waiting for the previous load to finish.
-    override fun onScrolled(view: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
+    override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
         var lastVisibleItemPosition = 0
         val totalItemCount = mLayoutManager.itemCount
 
         when (mLayoutManager) {
-            is androidx.recyclerview.widget.StaggeredGridLayoutManager -> {
+            is StaggeredGridLayoutManager -> {
                 val lastVisibleItemPositions =
-                    (mLayoutManager as androidx.recyclerview.widget.StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
+                    (mLayoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
                 // get maximum element within the list
                 lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
             }
-            is androidx.recyclerview.widget.GridLayoutManager -> {
-                lastVisibleItemPosition = (mLayoutManager as androidx.recyclerview.widget.GridLayoutManager).findLastVisibleItemPosition()
+            is GridLayoutManager -> {
+                lastVisibleItemPosition =
+                    (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
             }
-            is androidx.recyclerview.widget.LinearLayoutManager -> {
-                lastVisibleItemPosition = (mLayoutManager as androidx.recyclerview.widget.LinearLayoutManager).findLastVisibleItemPosition()
+            is LinearLayoutManager -> {
+                lastVisibleItemPosition =
+                    (mLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
             }
 
             // If the total item count is zero and the previous isn't, assume the
