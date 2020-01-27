@@ -81,9 +81,13 @@ RecyclerView
 Contains base classes for recycler view adapters. Just extend one of the base Adapters and use inbuilt easy to use methods.
 
 `BaseRecyclerViewAdapter` - for basic recycler view operations
+
 `MultiChoiceRecyclerViewAdapter` - for multi choice recycler view adapter
+
 `SingleChoiceRecyclerViewAdapter`- for single choice recycler view adapter
+
 `WrapAdapter` - wrap adapter for static header and footer
+
 `EndlessRecyclerViewScrollListener` - for endless scrolling 
 
 GsonExtensions
