@@ -7,11 +7,11 @@ Download
 --------
 
 ```groovy
-implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.17'
+implementation 'me.himanshusoni.androidessentials:recyclerview:1.0.18'
 
-implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.17'
+implementation 'me.himanshusoni.androidessentials:basicextensions:1.0.18'
 
-implementation 'me.himanshusoni.androidessentials:gson-extensions:1.0.17'
+implementation 'me.himanshusoni.androidessentials:gson-extensions:1.0.18'
 
 ```
 
