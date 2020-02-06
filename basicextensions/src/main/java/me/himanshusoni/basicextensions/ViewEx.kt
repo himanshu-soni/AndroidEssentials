@@ -17,3 +17,19 @@ fun View.invisible() {
 fun View.isVisible(): Boolean = visibility == View.VISIBLE
 fun View.isInvisible(): Boolean = visibility == View.INVISIBLE
 fun View.isGone(): Boolean = visibility == View.GONE
+
+fun View.enable() {
+    isEnabled = true
+}
+
+fun View.disable() {
+    isEnabled = false
+}
+
+fun View.select() {
+    isSelected = true
+}
+
+fun View.unselect() {
+    isSelected = false
+}

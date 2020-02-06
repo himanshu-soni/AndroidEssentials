@@ -7,6 +7,7 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.Uri
 import android.os.Build
+import android.telephony.TelephonyManager
 import android.widget.Toast
 import androidx.annotation.StringRes
 import java.io.File
@@ -35,6 +36,20 @@ fun Context.isConnectedToNetwork(): Boolean {
     }
 }
 
+
+fun Context.isSlowNetwork(): Boolean {
+    val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+    val network = connectivityManager?.activeNetworkInfo
+    val netSubType = network?.subtype
+    if (netSubType == TelephonyManager.NETWORK_TYPE_GPRS
+        || netSubType == TelephonyManager.NETWORK_TYPE_EDGE
+        || netSubType == TelephonyManager.NETWORK_TYPE_1xRTT
+    ) {
+        return true
+    }
+    return false
+}
+
 fun Context.isCameraAvailable(): Boolean =
     packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)
 
@@ -59,3 +74,4 @@ fun Context.shareText(text: String, subject: String = "", header: String = "Shar
     sharingIntent.putExtra(Intent.EXTRA_TEXT, text)
     startActivity(Intent.createChooser(sharingIntent, header))
 }
+
