@@ -27,3 +27,7 @@ fun Fragment.alert(
 
 fun Fragment.alert(block: AlertDialog.Builder.() -> Unit): AlertDialog? =
     if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) activity?.alert(block) else null
+
+fun Fragment.runOnUiThread(runBlock: () -> Unit) {
+    activity?.runOnUiThread { runBlock() }
+}
