@@ -4,7 +4,7 @@ import android.view.View
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
+import kotlin.properties.ReadWriteProperty
 
 fun Fragment.toast(msg: String) = activity?.toast(msg)
 fun Fragment.toast(@StringRes msgRes: Int) = activity?.toast(msgRes)
@@ -26,8 +26,14 @@ fun Fragment.alert(
 }
 
 fun Fragment.alert(block: AlertDialog.Builder.() -> Unit): AlertDialog? =
-    if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) activity?.alert(block) else null
+    if (isResumed) activity?.alert(block) else null
 
 fun Fragment.runOnUiThread(runBlock: () -> Unit) {
     activity?.runOnUiThread { runBlock() }
 }
+
+fun <T : Any> argument(): ReadWriteProperty<Fragment, T> =
+    FragmentArgumentDelegate()
+
+fun <T : Any> argumentNullable(): ReadWriteProperty<Fragment, T?> =
+    FragmentNullableArgumentDelegate()
