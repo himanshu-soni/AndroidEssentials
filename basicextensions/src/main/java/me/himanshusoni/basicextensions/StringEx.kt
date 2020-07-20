@@ -7,7 +7,8 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 
-inline fun String?.ifNullOrEmpty(defaultValue: () -> String) = if (isNullOrEmpty()) defaultValue() else this
+inline fun String?.ifNullOrEmpty(defaultValue: () -> String): String =
+    if (isNullOrEmpty()) defaultValue() else this.toString()
 
 fun String.mask(visibleFirst: Int, visibleLast: Int): String {
     var output = ""
