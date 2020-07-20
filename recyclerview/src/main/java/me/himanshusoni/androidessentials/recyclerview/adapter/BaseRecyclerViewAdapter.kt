@@ -12,7 +12,7 @@ abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(
         areItemsTheSame = { t1, t2 -> t1 == t2 })
 ) : RecyclerView.Adapter<VH>() {
 
-    private val dataSet: ArrayList<T> = ArrayList(list)
+    val dataSet: ArrayList<T> = ArrayList(list)
 
     override fun getItemCount(): Int = dataSet.size
 
