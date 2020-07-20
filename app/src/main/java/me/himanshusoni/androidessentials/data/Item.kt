@@ -6,7 +6,12 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Item(
     val name: String
-) : Parcelable
+) : Parcelable {
+    override fun equals(other: Any?): Boolean {
+        if (other is Item && this.name == other.name) return true
+        return false
+    }
+}
 
 object ItemProvider {
     val items = arrayListOf(

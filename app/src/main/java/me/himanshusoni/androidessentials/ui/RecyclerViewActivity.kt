@@ -2,6 +2,7 @@ package me.himanshusoni.androidessentials.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
@@ -16,6 +17,7 @@ import me.himanshusoni.androidessentials.data.ItemProvider
 import me.himanshusoni.androidessentials.recyclerview.adapter.BaseRecyclerViewAdapter
 import me.himanshusoni.androidessentials.recyclerview.adapter.MultiChoiceRecyclerViewAdapter
 import me.himanshusoni.androidessentials.recyclerview.adapter.SingleChoiceRecyclerViewAdapter
+import me.himanshusoni.androidessentials.recyclerview.adapter.diffCallback
 import me.himanshusoni.androidessentials.recyclerview.model.BaseViewHolder
 import me.himanshusoni.androidessentials.ui.base.BaseAppCompatActivity
 
@@ -53,12 +55,14 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         if (savedInstanceState != null) {
             onRestoreInstanceState(savedInstanceState)
         } else {
-            mListAdapter.add(ItemProvider.items)
-            mMultiAdapter.add(ItemProvider.items)
-            mSingleAdapter.add(ItemProvider.items)
+
 
             recyclerView.adapter = mListAdapter
             navView.setCheckedItem(R.id.nav_recycler_view)
+
+            mListAdapter.add(ItemProvider.items)
+            mMultiAdapter.add(ItemProvider.items)
+            mSingleAdapter.add(ItemProvider.items)
         }
 
 
@@ -100,8 +104,21 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         mSingleAdapter.onSaveInstanceState(outState)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menu?.add("Add Again")?.setOnMenuItemClickListener {
+            mListAdapter.replaceItems(ItemProvider.items)
+            mMultiAdapter.replaceItems(ItemProvider.items)
+            mSingleAdapter.replaceItems(ItemProvider.items)
+            return@setOnMenuItemClickListener true
+        }
+        return super.onCreateOptionsMenu(menu)
+    }
+
     private inner class RecyclerViewAdapter(list: ArrayList<Item>) :
-        BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list) {
+        BaseRecyclerViewAdapter<Item, RecyclerViewAdapter.ViewHolder>(list, diffCallback(
+            areContentsTheSame = { t1, t2 -> t1.name == t2.name },
+            areItemsTheSame = { t1, t2 -> t1 == t2 }
+        )) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val v = LayoutInflater.from(parent.context)
@@ -112,6 +129,7 @@ class RecyclerViewActivity : BaseAppCompatActivity() {
         internal inner class ViewHolder(root: View) : BaseViewHolder<Item>(root) {
             override fun bind(item: Item) {
                 itemView.tvText.text = item.name
+                itemView.setOnClickListener { remove(item) }
             }
         }
     }

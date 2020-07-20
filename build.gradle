@@ -2,18 +2,18 @@
 
 buildscript {
     ext {
-        versionCode = 19
-        versionName = "1.0.19"
+        versionCode = 20
+        versionName = "1.1.0"
 
         appCompatVersion = "1.1.0"
         recyclerViewVersion = "1.1.0"
         constraintLayoutVersion = "1.1.3"
-        materialVersion = "1.0.0"
+        materialVersion = '1.1.0'
 
         gsonVersion = '2.8.6'
 
-        gradleVersion = '3.5.3'
-        kotlinVersion = '1.3.61'
+        gradleVersion = '4.0.0'
+        kotlinVersion = '1.3.72'
     }
 
     repositories {
