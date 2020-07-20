@@ -4,24 +4,30 @@ import android.os.Bundle
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import me.himanshusoni.androidessentials.recyclerview.model.BaseViewHolder
-import java.util.*
 
-abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: ArrayList<T>) :
-    RecyclerView.Adapter<VH>() {
+abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(
+    list: List<T> = emptyList(),
+    private val diffCallback: DiffUtil.ItemCallback<T> = diffCallback(
+        areContentsTheSame = { t1, t2 -> t1 == t2 },
+        areItemsTheSame = { t1, t2 -> t1 == t2 })
+) : RecyclerView.Adapter<VH>() {
 
-    final override fun getItemCount(): Int = dataSet.size
+    private val dataSet: ArrayList<T> = ArrayList(list)
 
-    final override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
+    override fun getItemCount(): Int = dataSet.size
 
     fun getItem(position: Int): T = dataSet[position]
 
-    fun replaceItems(newItems: List<T>, areItemsTheSame: (old: T, new: T) -> Boolean) {
-        val oldData = dataSet
+    final override fun onBindViewHolder(holder: VH, position: Int) = holder.bind(getItem(position))
+
+    @Suppress("UNCHECKED_CAST")
+    fun replaceItems(newItems: List<T>) {
+        val oldData = dataSet.clone() as List<T>
         dataSet.clear()
         dataSet.addAll(newItems)
 
         DiffUtil.calculateDiff(
-            DiffCallback(oldData, newItems, diffCallback(areItemsTheSame))
+            DiffCallback(oldData, newItems, diffCallback)
         ).dispatchUpdatesTo(this)
     }
 
@@ -58,16 +64,6 @@ abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: A
         if (notify) notifyItemRangeRemoved(0, size)
     }
 
-    fun removeAll(notify: Boolean = true) {
-        val size = dataSet.size
-        if (size > 0) {
-            for (i in 0 until size) {
-                dataSet.removeAt(0)
-            }
-            if (notify) notifyItemRangeRemoved(0, size)
-        }
-    }
-
     fun isEmpty(): Boolean = dataSet.isEmpty()
 
     open fun onSaveInstanceState(outState: Bundle?) {
@@ -79,7 +75,7 @@ abstract class BaseRecyclerViewAdapter<T, VH : BaseViewHolder<T>>(var dataSet: A
             return
         }
         @Suppress("UNCHECKED_CAST")
-        dataSet = savedInstanceState.getSerializable("dataSet") as ArrayList<T>
+        dataSet.addAll(savedInstanceState.getSerializable("dataSet") as ArrayList<T>)
         notifyDataSetChanged()
     }
 }
