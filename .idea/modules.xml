@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AndroidEssentials.iml" filepath="$PROJECT_DIR$/AndroidEssentials.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/AndroidEssentials-app.iml" filepath="$PROJECT_DIR$/app/AndroidEssentials-app.iml" group="AndroidEssentials/app" />
-      <module fileurl="file://$PROJECT_DIR$/basicextensions/AndroidEssentials-basicextensions.iml" filepath="$PROJECT_DIR$/basicextensions/AndroidEssentials-basicextensions.iml" group="AndroidEssentials/basicextensions" />
-      <module fileurl="file://$PROJECT_DIR$/recyclerview/AndroidEssentials-recyclerview.iml" filepath="$PROJECT_DIR$/recyclerview/AndroidEssentials-recyclerview.iml" group="AndroidEssentials/recyclerview" />
-      <module fileurl="file://$PROJECT_DIR$/StudioProjects-AndroidEssentials.iml" filepath="$PROJECT_DIR$/StudioProjects-AndroidEssentials.iml" group="AndroidEssentials" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/basicextensions/basicextensions.iml" filepath="$PROJECT_DIR$/basicextensions/basicextensions.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gson-extensions/gson-extensions.iml" filepath="$PROJECT_DIR$/gson-extensions/gson-extensions.iml" group="AndroidEssentials/gson-extensions" />
-      <module fileurl="file://$PROJECT_DIR$/recyclerview/recyclerview.iml" filepath="$PROJECT_DIR$/recyclerview/recyclerview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AndroidEssentials.iml" filepath="$PROJECT_DIR$/.idea/AndroidEssentials.iml" group="AndroidEssentials" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="AndroidEssentials/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/basicextensions/basicextensions.iml" filepath="$PROJECT_DIR$/.idea/modules/basicextensions/basicextensions.iml" group="AndroidEssentials/basicextensions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gson-extensions/gson-extensions.iml" filepath="$PROJECT_DIR$/.idea/modules/gson-extensions/gson-extensions.iml" group="AndroidEssentials/gson-extensions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/recyclerview/recyclerview.iml" filepath="$PROJECT_DIR$/.idea/modules/recyclerview/recyclerview.iml" group="AndroidEssentials/recyclerview" />
     </modules>
   </component>
 </project>

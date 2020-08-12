@@ -17,6 +17,7 @@ fun Number.format(scale: Int, grouping: Boolean = true, forceScale: Boolean = tr
     val numberFormat = NumberFormat.getInstance()
     numberFormat.maximumFractionDigits = scale
     numberFormat.isGroupingUsed = grouping
+    numberFormat.roundingMode = RoundingMode.HALF_UP
     if (forceScale) numberFormat.minimumFractionDigits = scale
     return numberFormat.format(this)
 }

@@ -1,4 +1,4 @@
-package me.himashusoni.androidessentials.gsonextensions
+package me.himanshusoni.androidessentials.gsonextensions
 
 import com.google.gson.JsonPrimitive
 import java.math.BigDecimal
