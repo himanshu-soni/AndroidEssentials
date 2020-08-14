@@ -3,6 +3,7 @@ package me.himanshusoni.basicextensions
 import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.NumberFormat
+import java.util.*
 
 fun Double.round(places: Int): Double {
     require(places >= 0)
@@ -13,8 +14,13 @@ fun Double.round(places: Int): Double {
 }
 
 @JvmOverloads
-fun Number.format(scale: Int, grouping: Boolean = true, forceScale: Boolean = true): String {
-    val numberFormat = NumberFormat.getInstance()
+fun Number.format(
+    scale: Int,
+    grouping: Boolean = true,
+    forceScale: Boolean = true,
+    locale: Locale = Locale.ENGLISH
+): String {
+    val numberFormat = NumberFormat.getInstance(locale)
     numberFormat.maximumFractionDigits = scale
     numberFormat.isGroupingUsed = grouping
     numberFormat.roundingMode = RoundingMode.HALF_UP
